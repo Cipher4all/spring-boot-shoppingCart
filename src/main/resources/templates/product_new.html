@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog :: New Product</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div class="container">
+        <a th:href="@{/}">Home</a>
+        <form action="#"
+              th:action="@{'/kurtisKulture/addProducts'}"
+              th:object="${product}"
+              enctype="multipart/form-data"
+              method="post">
+            <h2>Add new Product</h2>
+            <div>
+                <input id="input-file" type="file" name="file" class="btn btn-outline-info" accept="image/*" />
+            </div>
+            <div>
+                <label for="new-post-title">Product name</label>
+                <input id="new-post-title" type="text" th:field="*{name}" placeholder="Title"/>
+            </div>
+            <div>
+                <label for="new-post-body">Description</label>
+                <textarea id="new-post-body" th:field="*{description}"></textarea>
+            </div>
+            <select th:name="id">
+		        <option th:each="category : ${categories}" th:value="${category.id}">[[${category.categoryName}]]</option>
+		    </select>
+            <div>
+                <label for="new-post-tags">Add Price</label>
+                <div class="newtags">
+					<input id="new-post-title" type="number" th:field="*{price}" placeholder="Add Price"/>
+				</div>
+            </div>
+            <button type="submit">Publish Post</button>
+        </form>
+    </div>
+
+</body>
+</html>

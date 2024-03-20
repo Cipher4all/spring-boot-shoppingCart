@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Shop</title>
+    <link th:rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav">
+            <img th:src="@{/img/dark-logo.png}" class="brand-logo" alt="">
+            <div class="nav-items">
+                <div class="search">
+                    <input type="text" class="search-box" placeholder="search brand, product">
+                    <button class="search-btn">search</button>
+                </div>
+                <a href="signup.html"><img th:src="@{/img/user.png}" alt=""></a>
+                <a href="#"><img th:src="@{/img/cart.png}" alt=""></a>
+            </div>
+        </div>
+        <ul class="links-container">
+            <li class="link-item"><a href="#" class="link">home</a></li>
+            <li class="link-item"><a href="#" class="link">women</a></li>
+            <li class="link-item"><a href="#" class="link">men</a></li>
+            <li class="link-item"><a href="#" class="link">kids</a></li>
+            <li class="link-item"><a href="#" class="link">accessories</a></li>
+        </ul>
+    </nav>
+    <header class="hero-section">
+        <div class="content">
+            <img th:src="@{/img/light-logo.png}" class="logo" alt="">
+            <p class="sub-heading">Best Fashion Collection Of All Time</p>
+        </div>
+    </header>
+    <section class="product">
+        <h2 class="product-category">best selling</h2>
+        <div class="product-container">
+            <div class="product-card" th:each="items : ${cartlist.cartItems}">
+                <div class="product-image">
+                    <img th:src="@{'data:image/jpeg;base64,'+${items.product.generateBase64Image()}}" alt="product" class="...">
+                </div>
+                <div class="product-info">
+                    <h2><a th:href="@{'/products/' + ${items.product.id}}" th:text="${items.product.name}">Title</a></h2>
+                    <p class="product-short-des" th:text="${items.product.description}">a short line about the cloth..</p>
+                    <p class="product-quanity" th:text="${items.quantity}"></p>
+                    <p class="product-quanity" th:text="${items.product.category.categoryName}"></p>
+                    <span class="price" th:text="${items.product.price}">$20</span>
+                    <span class="actual-price">$40</span>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+      <footer></footer>
+    <script th:src="@{/js/footer.js}"></script>
+</body>
+<script th:src="@{/js/home.js}"></script>
+</html>

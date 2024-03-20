@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product page</title>
+    <link th:rel="stylesheet" th:href="@{/css/home.css}">
+    <link th:rel="stylesheet" th:href="@{/css/product.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav">	
+            <img th:src="@{/img/dark-logo.png}" class="brand-logo" alt="">
+            <div class="nav-items">
+                <div class="search">
+                    <input type="text" class="search-box" placeholder="search brand, product">
+                    <button class="search-btn">search</button>
+                </div>
+                <a href="signup.html"><img th:src="@{/img/user.png}" alt=""></a>
+                <a href="#"><img th:src="@{/img/cart.png}" alt=""></a>
+            </div>
+        </div>
+        <ul class="links-container">
+            <li class="link-item"><a href="#" class="link">home</a></li>
+            <li class="link-item"><a href="#" class="link">women</a></li>
+            <li class="link-item"><a href="#" class="link">men</a></li>
+            <li class="link-item"><a href="#" class="link">kids</a></li>
+            <li class="link-item"><a href="#" class="link">accessories</a></li>
+        </ul>
+    </nav>
+    <div sec:authorize="isAuthenticated()">
+    <form action="#"
+              th:action="@{'/cart/add'}"
+              th:object="${addToCartDto}"
+              enctype="multipart/form-data"
+              method="post">
+    <section class="product-details">
+        <div class="image-slider">
+            <div class="product-images">
+                <img th:src="@{'data:image/jpeg;base64,'+${product.generateBase64Image()}}" class="active" alt="">
+                <img th:src="@{'data:image/jpeg;base64,'+${product.generateBase64Image()}}" alt="">
+                <img th:src="@{'data:image/jpeg;base64,'+${product.generateBase64Image()}}" alt="">
+                <img th:src="@{'data:image/jpeg;base64,'+${product.generateBase64Image()}}" alt="">
+            </div>
+        </div>
+        <div class="product">
+            <h2 class="product-brand" th:text="${product.name}">calvin klein</h2>
+            <p class="product-short-des" th:text="${product.description}">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+            <span class="product-price" th:text="${product.price}">$99</span>
+            <span class="product-actual-price">$200</span>
+            <span class="product-discount">( 50% off)</span>
+
+            <p class="product-sub-heading">select size</p>
+            
+            <input type="radio" name="size" value="s" checked hidden id="s-size">
+            <label for="s-size" class="size-radio-btn check">s</label>
+            <input type="radio" name="size" value="m" hidden id="m-size">
+            <label for="m-size" class="size-radio-btn">m</label>
+            <input type="radio" name="size" value="l" hidden id="l-size">
+            <label for="l-size" class="size-radio-btn">l</label>
+            <input type="radio" name="size" value="xl" hidden id="xl-size">
+            <label for="xl-size" class="size-radio-btn">xl</label>
+            <input type="radio" name="size" value="xxl" hidden id="xxl-size">
+            <label for="xxl-size" class="size-radio-btn">xxl</label>
+
+            <button class="submit">add to cart</button>
+            <button class="submit">add to wishlist</button>
+        </div>
+    </section>
+    <section class="detail-des">
+        <h2 class="heading">description</h2>
+        <p class="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, ......</p>
+    </section>
+    </form>
+    </div>
+    <footer></footer>
+</body>
+<script th:src="@{/js/home.js}"></script>
+<script th:src="@{/js/footer.js}"></script>
+<script th:src="@{/js/product.js}"></script>
+</html>
